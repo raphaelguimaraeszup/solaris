@@ -1,0 +1,79 @@
+Redux: É um sistema de gerenciamento de estado para cross-component ou app-wide state (estado de todo o aplicativo).
+
+Existem 3 tipos de definição para state (estado): Local State, Cross-Component State e App-Wide State
+
+Local State: State que pertence à um único componente. Deve ser gerenciado internamente pelo componente via useState()/useReducer()
+
+Cross-Component State: State que afeta múltiplos componentes. Ex: state de abrir/fechar de uma modal overlay. Requer "prop chains" / "prop drilling" ou 
+react context ou redux.
+
+App-Wide State: State que afeta toda a aplicação (maioria/todos componentens). Ex: Autenticação do usuário (status). Requer "prop chains" / "prop drilling" ou 
+react context ou redux
+
+Redux vs React Context
+
+Desvantagens de usar React Context:
+- Setup Complexo: Dependendo do tamanho do projeto pode acabar formando um cenário grande de providers encadeados
+- Performance: React context não é otimizado para uma frequência alta de mudanças de estados
+
+Iniciando com Redux: Basta rodar `npm install redux react-redux`
+
+Como boa prática, crie uma pasta chamada store no mesmo nível da pasta components, e nela, cria-se o arquivo index.js onde será criado a store.
+
+Redux Toolkit: Essa ferramenta ajuda muito no trabalho com o Redux, ao inves de criarmos um createStore, tem a opção de criar um createSlice, com
+diversas fatias de blocos específicos para cada gerenciamento de estado. Fora isso, não precisamos ficar recriando o objeto para que ele fica de forma
+imutável, podemos sem problemas mudar o state tendo em vista que COM A UTILIZAÇÃO dessa lib, ela mesmo internamente faz a verificação de que está tendo
+essa mudança no estado e ela corrige para que não tenha problema algum.
+
+Side Effects, Async Tasks & Redux
+
+Reducers precisam ser funções puras (pure), side-effect free e synchronous. Input (Old state + action) -> Output (New state)
+
+Onde os side-effects (requisiçoes HTTP por ex) e tarefas assíncronas devem ser executadas então? Duas abordagens possíveis:
+- Dentro dos componentes (ex: useEffect())
+- Dentro de "action creators" (Redux trás uma solução para isso)
+
+Fat Reducers vs Fat Components vs Fat Actions
+Onde colocar nossa lógica?
+
+Synchronous, side-effect free code (i.e. data transformations): PREFERIR Reducers e EVITAR Action Creators ou Components
+Async code or code with side-effects: PREFERIR Action Creators ou Components e NUNCA USAR Reducers
+
+Thunk: É uma função que retarda uma ação até depois, uma função criadora de ação (action creator function) que não retorna a ação em si, mas outra 
+função que eventualmente retorna a ação
+
+Routing: É basicamente a forma de manipular um caminho (path) na URL para retornar o código/componente correto que irá representar aquela página
+
+Link vs NavLink: Basicamente a diferença é que o NavLink possibilita a configuração de estilo para os estados dos links, como o active por exemplo.
+Ao adicionar activeClassName={classes.active}, você está solicitando que para o estado "active" coloque a classe css "active" para o mesmo.
+
+Switch component e a propriedade exact: Com o Swicth component ele acaba selecionando o primeiro componente que atende com o "match" do caminho que está
+na URL e o path que está configurado no Route, fazendo com que não mostre todos os componentes que atendam ao "match". A prop exact colocada no Route,
+faz com que mostre o componente exato que combina com o caminho da URL como um todo.
+
+useParams: Serve para obter os parâmetros que estão sendo passados pela URL.
+
+useHistory: Tem esse nome porque através dele conseguimos mudar o histórico de navegação. Com esse hook conseguimos fazer a navegação programada, ou seja,
+sem ser através de um link, conseguimos passar qual "path" desejamos navegar. Podemos fazer de duas formas, através do método push, que desta forma ele
+navega para o path passado e disponibiliza voltar para o "path" anterior através do voltar (back) do navegador, e também pelo método replace, que nesse 
+caso ele substitui o caminho passado pelo caminho atual, fazendo uma espécie de redirect, desta forma não é disponibilizado voltar para o caminho anterior. 
+
+useLocation: Nos fornece um objeto com as informações sobre o página carregada atual.
+
+useRouteMatch: É parecido com o useLocation mas trás mais informações sobre a rota atual carregada.
+
+Testando aplicações React
+3 tipos diferentes de testes: Testes unitários, testes de integração e e2e (end-to-end)
+
+Testes unitários: testa os blocos de construção individuais (funções, componentes) isoladamente, as menores porções possíveis. É o tipo mais comum e 
+mais importante de teste.
+
+Testes de integração: Testa a combinação dos múltiplos blocos de construção, no caso do React, como os componentes funcionam juntos.
+
+E2E: Testa cenários completos da aplicação, como o usuário pode experimentar eles. Fluxo de uma ponta até a outra.
+
+Escrevendo testes - Regra dos 3 'A's
+Arrange (Arranjar / Organizar)-> Configurar os dados de teste, condições de teste e ambiente de teste
+Act (Atuar) -> Executar a lógica que deve ser testada (função de execução)
+Assert (Afirmar) -> Compare os resultados da execução com os resultados esperados
+

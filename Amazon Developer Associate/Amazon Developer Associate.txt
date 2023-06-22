@@ -1,0 +1,16 @@
+IAM - Identity Access Management: É o local da AWS onde conseguimos criar usuários, grupos, permissões e assim por diante. Liberando previlégios e acessos.
+
+- Multifactor Authentication
+Função que solicita, fora o nome de usuário (email) e senha, um token ou um código gerado via app (authenticator do Google por exemplo).
+
+- Identity Federation
+Através dessa função, a empresa possibilita que a AWS se conecte ao usuários do seu Active Directory, contas Facebook, Linkedin e etc... fazendo com que
+a mesma conta utilizada pelos usuários em alguma dessas plataformas utilizadas pela empresa, seja usada na AWS.
+
+- Permissions
+O IAM disponibiliza que seja dado permissões de forma bem granular de acordo ao papel/cargo do usuário, chegando ao nível por exemplo de que ele só pode
+criar instâncias de máquinas virtuais EC2 do tipo small com 12GB de RAM, 1TB de disco e por ai vai.
+
+- PCI DSS Compliance
+
+A forma em que é organizada a estrutura do IAM é via Users, Groups, Roles e Policies.
